@@ -1,10 +1,49 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <Nav></Nav>
+    <router-view  v-if="$store.state.profile.user"/>
+    <Auth
+      v-else
+      v-bind:credentials="$store.state.auth.loginForm"
+      @submit="onSubmit"
+      @input="onInput"
+    ></Auth>
 </template>
+
+<script lang="ts">
+import { ComponentOptions } from 'vue';
+import { Options, Vue } from 'vue-class-component';
+import { useStore } from 'vuex';
+import Auth from '@/components/Auth.vue';
+import Nav from './components/Nav.vue';
+import { LoginForm } from './types/loginForm.d';
+
+@Options({
+  components: {
+    Auth,
+    Nav,
+  },
+})
+export default class AppView extends Vue {
+  constructor(props: ComponentOptions) {
+    const store = useStore();
+    store.dispatch('profile/getUser');
+    super(props);
+  }
+
+  public async onLogin() {
+    console.log(this.$store);
+  }
+
+  public async onInput(event: LoginForm) {
+    this.$store.commit('auth/credentials', event);
+  }
+
+  public async onSubmit() {
+    this.$store.dispatch('auth/login');
+    console.log(this.$store.profile);
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
@@ -13,18 +52,5 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 </style>
