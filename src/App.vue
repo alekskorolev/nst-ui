@@ -57,6 +57,7 @@ html, body, #app {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-image: url('@/assets/menu_bg.jpg');
+  background: url('@/assets/menu_bg.jpg') no-repeat;
+  
 }
 </style>
