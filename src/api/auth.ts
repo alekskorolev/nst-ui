@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { LoginRequestResult, ProfileRequestResult } from '@/types/authRequests.d';
+import { authStorage } from '@/api/authStorage';
 
 export async function login(username: string, password: string): Promise<LoginRequestResult> {
   try {
@@ -17,14 +18,15 @@ export async function login(username: string, password: string): Promise<LoginRe
   }
 }
 
-export async function user(jwt: string|null): Promise<ProfileRequestResult> {
+export async function user(): Promise<ProfileRequestResult> {
+  const { token } = authStorage;
   try {
-    if (!jwt) {
+    if (!token) {
       throw new Error('Unauthorized');
     }
     const result = await axios.get('http://0.0.0.0:3000/profile', {
       headers: {
-        Authorization: `Bearer ${jwt}`,
+        Authorization: `Bearer ${token}`,
       },
     });
     console.log(result.data);

@@ -1,6 +1,6 @@
 <template>
     <div class="auth">
-      Авторзация
+      <h3>{{ $t('Авторзация') }}</h3>
       <form>
         <fieldset>
           <label for="login">
@@ -48,17 +48,13 @@ export default class Auth extends Vue {
 }
 </script>
 
-  <style scoped lang="scss">
-  nav {
-    padding: 30px;
-
-    a {
-      font-weight: bold;
-      color: #2c3e50;
-
-      &.router-link-exact-active {
-        color: #42b983;
-      }
-    }
-  }
-  </style>
+<style scoped lang="scss">
+.auth {
+  background-image: url('@/assets/form_bg.jpg');
+  width: 500px;
+  left: 50%;
+  top: 200px;
+  position: relative;
+  margin-left: -250px;
+}
+</style>

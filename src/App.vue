@@ -1,12 +1,12 @@
 <template>
-  <Nav></Nav>
-    <router-view  v-if="$store.state.profile.user"/>
-    <Auth
-      v-else
-      v-bind:credentials="$store.state.auth.loginForm"
-      @submit="onSubmit"
-      @input="onInput"
-    ></Auth>
+  <!--Nav></Nav-->
+  <router-view  v-if="$store.state.profile.user"/>
+  <Auth
+    v-else
+    v-bind:credentials="$store.state.auth.loginForm"
+    @submit="onSubmit"
+    @input="onInput"
+  ></Auth>
 </template>
 
 <script lang="ts">
@@ -46,11 +46,17 @@ export default class AppView extends Vue {
 </script>
 
 <style lang="scss">
+html, body, #app {
+  margin: 0;
+  min-height: 100%;
+  height: 100%;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-image: url('@/assets/menu_bg.jpg');
 }
 </style>
