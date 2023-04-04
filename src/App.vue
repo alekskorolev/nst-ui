@@ -58,6 +58,7 @@ html, body, #app {
   text-align: center;
   color: #2c3e50;
   background: url('@/assets/menu_bg.jpg') no-repeat;
-  
+  background-size: cover;
+  background-position: center;
 }
 </style>
