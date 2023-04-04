@@ -9,7 +9,7 @@ export default {
   namespaced: true,
   state: {
     user: null,
-    profiles: []
+    profiles: [],
   },
   mutations: {
     user(state: ProfileState, payload: ProfileEntity) {
@@ -17,7 +17,7 @@ export default {
     },
     profiles(state: ProfileState, payload: Array<any>) {
       state.profiles = payload;
-    }
+    },
   },
   actions: {
     async getUser({ commit }: ActionContext<AuthState, object>) {
@@ -28,12 +28,15 @@ export default {
         console.log('profile error', error);
       }
     },
+    clearUser({ commit }: ActionContext<AuthState, object>) {
+      commit('user', null);
+    },
     async getProfiles({ commit }: ActionContext<AuthState, object>) {
       const { success, error, profiles } = await getProfiles();
       if (success && profiles) {
-        commit('profiles', profiles)
+        commit('profiles', profiles);
       } else {
-        console.log('profiles load error', error)
+        console.log('profiles load error', error);
       }
     },
   },

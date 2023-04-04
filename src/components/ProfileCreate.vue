@@ -1,10 +1,13 @@
 <template>
-  <div class="profiles panel">
-    <ul>
-      <li v-for="profile in profiles" v-bind:key="profile.id" v-on:click="() => onStartGame(profile)">
-        {{ profile.username }}
-      </li>
-    </ul>
+  <div class="profile panel">
+    <form>
+      <fieldset>
+        <label>
+          <input>
+        </label>
+      </fieldset>
+    </form>
+    <MenuButton v-on:click="onStartGame" v-bind:title="$t('Начать игру')"></MenuButton>
     <MenuButton v-on:click="onBack" v-bind:title="$t('Назад')"></MenuButton>
   </div>
 </template>
@@ -21,11 +24,11 @@ import MenuButton from './Button.vue';
     profiles: Array,
   },
 })
-export default class ProfileList extends Vue {
+export default class ProfileCreate extends Vue {
   public profiles!: Array<any>
 
-  public onStartGame(profile: any) {
-    console.log(profile);
+  public onStartGame($event: MouseEvent) {
+    console.log('start', $event);
   }
 
   public onBack() {

@@ -1,5 +1,4 @@
 <template>
-  <!--Nav></Nav-->
   <router-view  v-if="$store.state.profile.user"/>
   <Auth
     v-else
@@ -14,13 +13,11 @@ import { ComponentOptions } from 'vue';
 import { Options, Vue } from 'vue-class-component';
 import { useStore } from 'vuex';
 import Auth from '@/components/Auth.vue';
-import Nav from './components/Nav.vue';
 import { LoginForm } from './types/loginForm.d';
 
 @Options({
   components: {
     Auth,
-    Nav,
   },
 })
 export default class AppView extends Vue {

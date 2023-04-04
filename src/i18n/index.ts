@@ -1,11 +1,11 @@
 import { createI18n } from 'vue-i18n';
-import ru from './ru.json'
+import ru from './ru.json';
 
 const i18n = createI18n({
-  locale: "ru",
+  locale: 'ru',
   messages: {
-    ru
-  }
+    ru,
+  },
   // something vue-i18n options here ...
 });
 

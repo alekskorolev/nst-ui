@@ -1,5 +1,5 @@
 <template>
-    <div class="auth">
+    <div class="auth panel">
       <h2>{{ $t('Авторзация') }}</h2>
       <form>
         <fieldset>
@@ -49,16 +49,8 @@ export default class Auth extends Vue {
 </script>
 
 <style scoped lang="scss">
+@import './menuBlock.scss';
 .auth {
-  background-image: url('@/assets/form_bg.jpg');
-  width: 500px;
-  left: 50%;
-  top: 200px;
-  position: relative;
-  margin-left: -250px;
-  padding-bottom: 10px;
-  border: 2px solid #545454;
-  border-radius: 3px;
   h2 {
     border-bottom: 1px solid #545454;
     padding-bottom: 10px;

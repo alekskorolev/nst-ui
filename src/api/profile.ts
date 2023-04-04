@@ -25,3 +25,10 @@ export async function getProfiles() {
     };
   }
 }
+
+export async function createProfile() {
+  return {
+    success: false,
+    error: new Error('Not implemented'),
+  };
+}

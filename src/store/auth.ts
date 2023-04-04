@@ -13,7 +13,6 @@ export default {
       password: '',
     },
     formError: '',
-    user: null,
   },
   getters: {
   },
@@ -41,7 +40,9 @@ export default {
         throw new Error('Invalid username or password');
       }
     },
-  },
-  modules: {
+    logout({ dispatch }: ActionContext<AuthState, object>) {
+      dispatch('profile/clearUser', null, { root: true });
+      authStorage.token = null;
+    },
   },
 };
