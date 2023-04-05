@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LoginRequestResult, ProfileRequestResult } from '@/types/authRequests.d';
+import { LoginRequestResult, ProfileRequestResult } from '@/types/api.d';
 import { authStorage } from '@/api/authStorage';
 
 export async function login(username: string, password: string): Promise<LoginRequestResult> {
