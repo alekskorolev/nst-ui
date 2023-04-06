@@ -13,7 +13,12 @@ import MainMenu from '@/components/MainMenu.vue';
     MainMenu,
   },
 })
-export default class HomeView extends Vue {}
+export default class HomeView extends Vue {
+  public mounted(): void {
+      
+    console.log('mounted')
+  }
+}
 </script>
 
 <style lang="scss">

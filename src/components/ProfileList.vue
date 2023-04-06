@@ -2,7 +2,8 @@
   <div class="profiles panel">
     <ul>
       <li v-for="profile in profiles" v-bind:key="profile.id" v-on:click="() => onStartGame(profile)">
-        {{ profile.username }}
+        <img v-bind:src="profile.avatar">
+        <span>{{ profile.username }}</span>
       </li>
     </ul>
     <MenuButton v-on:click="onBack" v-bind:title="$t('Назад')"></MenuButton>
@@ -25,6 +26,7 @@ export default class ProfileList extends Vue {
   public profiles!: Array<any>
 
   public onStartGame(profile: any) {
+    this.$router.push('/game')
     console.log(profile);
   }
 
@@ -36,4 +38,28 @@ export default class ProfileList extends Vue {
 
 <style lang="scss" scoped>
   @import './menuBlock.scss';
+  ul {
+    list-style-type: none;
+    padding: 0;
+    li {
+      text-align: left;
+      cursor: pointer;
+      padding: 0 10px;
+      margin-bottom: 10px;
+      &:hover {
+        background-color: rgba($color: #000000, $alpha: 0.3);
+      }
+      img {
+        width: 135px;
+        height: 135px;
+        margin-right: 10px;
+      }
+      span {
+        text-transform: capitalize;
+        font-size: 32px;
+        position: relative;
+        top: -100px;
+      }
+    }
+  }
 </style>

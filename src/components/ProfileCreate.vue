@@ -33,6 +33,7 @@ export default class ProfileCreate extends Vue {
   public onStartGame(event: MouseEvent) {
     console.log(event)
     this.$store.dispatch('profile/saveProfile')
+    this.$router.push('/game')    
   }
 
   public onBack() {
