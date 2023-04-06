@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { authStorage } from '@/api/authStorage';
 import { AvatarUploadResult, ProfileRequestResult, ProfilesRequestResult } from '@/types/api.d';
-import { NewProfileForm } from '@/types/profileState';
+import { NewProfileForm } from '@/types/profileState.d';
 
 export async function getProfiles(): Promise<ProfilesRequestResult> {
   const { token } = authStorage;
@@ -30,22 +30,22 @@ export async function getProfiles(): Promise<ProfilesRequestResult> {
 
 export async function uploadAvatar(file: File): Promise<AvatarUploadResult> {
   try {
-    const formdata = new FormData()
-    formdata.append('file', file)
+    const formdata = new FormData();
+    formdata.append('file', file);
     const result = await axios.post('http://0.0.0.0:3002/avatar', formdata, {
       headers: {
-        'Content-Type': 'multipart/form-data'
-      }
+        'Content-Type': 'multipart/form-data',
+      },
     });
     return {
       success: true,
-      fileurl: result.data
-    }
+      fileurl: result.data,
+    };
   } catch (e) {
     return {
       success: false,
-      error: 'Some error'
-    }
+      error: 'Some error',
+    };
   }
 }
 
@@ -62,12 +62,12 @@ export async function createProfile(profile: NewProfileForm): Promise<ProfileReq
     });
     return {
       success: true,
-      profile: result.data
-    }
+      profile: result.data,
+    };
   } catch (e) {
     return {
       success: false,
-      error: 'Some error'
+      error: 'Some error',
     };
   }
 }

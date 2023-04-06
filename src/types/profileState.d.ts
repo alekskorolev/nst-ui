@@ -1,8 +1,14 @@
 import { ProfileEntity } from './api.d';
 
-interface NewProfileForm {
+export interface NewProfileForm {
     username: string,
     avatar: string,
+}
+
+export interface GameProfile {
+  id: string,
+  username: string,
+  avatar: string,
 }
 
 export interface ProfileState {

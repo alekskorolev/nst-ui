@@ -1,8 +1,13 @@
 <template>
   <div class="profiles panel">
     <ul>
-      <li v-for="profile in profiles" v-bind:key="profile.id" v-on:click="() => onStartGame(profile)">
-        <img v-bind:src="profile.avatar">
+      <li
+        v-for="profile in profiles"
+        v-bind:key="profile.id"
+        v-on:click="() => onStartGame(profile)"
+        v-on:keydown="$event => $event"
+      >
+        <img v-bind:src="profile.avatar" v-bind:alt="profile.username">
         <span>{{ profile.username }}</span>
       </li>
     </ul>
@@ -12,6 +17,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import { GameProfile } from '../types/profileState.d';
 import MenuButton from './Button.vue';
 
 @Options({
@@ -23,10 +29,10 @@ import MenuButton from './Button.vue';
   },
 })
 export default class ProfileList extends Vue {
-  public profiles!: Array<any>
+  public profiles!: Array<GameProfile>
 
-  public onStartGame(profile: any) {
-    this.$router.push('/game')
+  public onStartGame(profile: GameProfile) {
+    this.$router.push('/game');
     console.log(profile);
   }
 

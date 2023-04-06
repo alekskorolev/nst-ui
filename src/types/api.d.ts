@@ -17,7 +17,7 @@ export interface ProfileRequestResult extends RequestResult {
 }
 
 export interface AvatarUploadResult extends RequestResult {
-  fileurl?: string|null  
+  fileurl?: string|null
 }
 
 export interface ProfilesRequestResult extends RequestResult {

@@ -18,15 +18,15 @@ export default {
     user(state: ProfileState, payload: ProfileEntity) {
       state.user = payload;
     },
-    profiles(state: ProfileState, payload: Array<any>) {
+    profiles(state: ProfileState, payload: Array<ProfileEntity>) {
       state.profiles = payload;
     },
     setNewAvatar(state: ProfileState, payload: string) {
-      state.newProfile.avatar = payload
+      state.newProfile.avatar = payload;
     },
     setCurrentProfile(state: ProfileState, payload: ProfileEntity) {
-      console.log(payload)
-    }
+      console.log(payload);
+    },
   },
   actions: {
     async getUser({ commit }: ActionContext<ProfileState, object>) {
@@ -53,7 +53,7 @@ export default {
       if (success && fileurl) {
         commit('setNewAvatar', fileurl);
       } else {
-        console.error(error)
+        console.error(error);
       }
     },
     async saveProfile({ state, commit }: ActionContext<ProfileState, object>) {
@@ -61,8 +61,8 @@ export default {
       if (success && profile) {
         commit('setCurrentProfile', profile);
       } else {
-        console.error(error)
+        console.error(error);
       }
-    }
+    },
   },
 };

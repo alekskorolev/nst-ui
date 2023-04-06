@@ -7,7 +7,12 @@
         </label>
       </fieldset>
       <fieldset class="avatar">
-        <img v-bind:src="$store.state.profile.newProfile.avatar" v-on:click="onAvatarDialog">
+        <img
+          v-bind:src="$store.state.profile.newProfile.avatar"
+          v-on:click="onAvatarDialog"
+          alt="Select avatar image"
+          v-on:keydown="() => {}"
+        >
       </fieldset>
     </form>
     <MenuButton v-on:click="onStartGame" v-bind:title="$t('Начать игру')"></MenuButton>
@@ -17,6 +22,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import { GameProfile } from '@/types/profileState.d';
 import MenuButton from './Button.vue';
 
 @Options({
@@ -28,12 +34,12 @@ import MenuButton from './Button.vue';
   },
 })
 export default class ProfileCreate extends Vue {
-  public profiles!: Array<any>
+  public profiles!: Array<GameProfile>
 
   public onStartGame(event: MouseEvent) {
-    console.log(event)
-    this.$store.dispatch('profile/saveProfile')
-    this.$router.push('/game')    
+    console.log(event);
+    this.$store.dispatch('profile/saveProfile');
+    this.$router.push('/game');
   }
 
   public onBack() {
@@ -41,17 +47,17 @@ export default class ProfileCreate extends Vue {
   }
 
   public onAvatarDialog() {
-    const input = document.createElement('input')
-    input.type = 'file'
+    const input = document.createElement('input');
+    input.type = 'file';
     const listener = (event: Event) => {
-      const target: HTMLInputElement = <HTMLInputElement>event.target
-      const file = target.files && target.files[0]
-      this.$store.dispatch('profile/uploadAvatar', file)
-      input.removeEventListener('change', listener)
-      input.remove()
-    }
-    input.addEventListener('change', listener)
-    input.click()
+      const target: HTMLInputElement = event.target as HTMLInputElement;
+      const file = target.files && target.files[0];
+      this.$store.dispatch('profile/uploadAvatar', file);
+      input.removeEventListener('change', listener);
+      input.remove();
+    };
+    input.addEventListener('change', listener);
+    input.click();
   }
 }
 </script>
@@ -66,7 +72,6 @@ export default class ProfileCreate extends Vue {
     img {
       width: 100px;
       height: 100px;
-      // background: url('@/assets/ava_placeholder.jpeg');
     }
   }
 </style>
