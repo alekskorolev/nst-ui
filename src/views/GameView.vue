@@ -8,85 +8,37 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import {
-  PerspectiveCamera,
-  Scene,
-  Mesh,
-  TextureLoader,
-  BoxGeometry,
-  MeshBasicMaterial,
-  WebGLRenderer,
-} from 'three';
+import { Box } from '@/game/box';
+import { Game } from '../game/index';
 
 @Options({
   components: {
   },
 })
 export default class HomeView extends Vue {
-  public camera!: PerspectiveCamera;
-
-  public scene!: Scene;
-
-  public mesh!: Mesh;
-
-  public renderer!: WebGLRenderer;
-
-  public active = true;
+  public game!: Game;
 
   public initGame() {
-    this.camera = new PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-    this.camera.position.z = 400;
-
-    this.scene = new Scene();
-
-    const texture = new TextureLoader().load('img/crate.gif');
-    const geometry = new BoxGeometry(200, 200, 200);
-    const material = new MeshBasicMaterial({ map: texture });
-
-    this.mesh = new Mesh(geometry, material);
-    this.scene.add(this.mesh);
+    const mesh = new Box();
+    // this.scene.add(this.mesh);
 
     const canvas = this.$refs.game as HTMLCanvasElement;
-
-    this.renderer = new WebGLRenderer({ canvas, antialias: true });
-    this.renderer.setPixelRatio(window.devicePixelRatio);
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-    window.addEventListener('resize', this.onWindowResize);
-  }
-
-  public onWindowResize() {
-    this.camera.aspect = window.innerWidth / window.innerHeight;
-    this.camera.updateProjectionMatrix();
-
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-  }
-
-  public animate() {
-    console.log('animate');
-    if (!this.active) return;
-    requestAnimationFrame(this.animate);
-
-    this.mesh.rotation.x += 0.005;
-    this.mesh.rotation.y += 0.01;
-
-    this.renderer.render(this.scene, this.camera);
+    this.game = new Game(canvas);
+    this.game.add(mesh)
+    
   }
 
   public mounted(): void {
-    console.log('mounted');
     this.initGame();
-    this.animate();
+    this.game.toogleState(true);
   }
 
   public pause() {
-    this.active = !this.active;
-    if (this.active) {
-      this.animate();
-    }
+    this.game.toogleState()
   }
 
   public beforeUnmount(): void {
-    this.active = false;
+    this.game.destroy()
   }
 }
 </script>
